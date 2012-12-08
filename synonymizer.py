@@ -10,27 +10,38 @@ each word replaced by a synonym.
 thesaurus used:
 http://www.gutenberg.org/dirs/etext02/mthes10.zip
 '''
+import os.path
+import pickle
 import random
 import re
 
 #thesaurus file path
-file_path = "THESAURUS FILE PATH"
-#text to 'synonymise'
-text = input("Enter text to synonymise: ")
+file_path = "mthesaur.txt"
 
 def import_thesaurus(file_path):
-    d = dict()
-    file = open(file_path,'r')
-    for line in file:
-        #for every line (contains a word and its synonyms),
-        #split the line at its delim, assign the first word as key,
-        #and the synonyms as the value (in a list)
-        line_list = line.split(',')
-        key = line_list[0]
-        del line_list[0]
-        value = line_list
-        d[key] = value
-    return d
+    #check for pickled thesaurus
+    if os.path.isfile("thes.p"):
+        thes = pickle.load(open( "thes.p", "rb" ))
+    else:
+        #if a pickled thesaurus doesn't exist, create one
+        thes = dict()
+        file = open(file_path,'r')
+        for line in file:
+            #for every line (contains a word and its synonyms),
+            #split the line at its delim, assign the first word as key,
+            #and the synonyms as the value (in a list)
+            line_list = line.split(',')
+            key = line_list[0]
+            del line_list[0]
+            value = line_list
+            #remove the trailing new line character from the last word
+            value[-1] = value[-1].rstrip('\n')
+            thes[key] = value
+        
+        #pickle thesaurus
+        pickle.dump(thes, open( "thes.p", "wb" ))
+        
+    return thes
 
 def pick(word_list):
     #pick a random list item
@@ -57,10 +68,15 @@ def process(string):
     result = re.findall(r"[\w']+|[\s.,!?;]", string)
     return result
 
-
+#import a thesaurus from original txt file or pickle file
 thes = import_thesaurus(file_path)
-processed_text = process(text)
-result = synonymise(processed_text, thes)
 
-print(''.join(result))
+#keep prompting and processing until user terminates
+while True:
+    #text to 'synonymise'
+    text = input(">> ")
+    processed_text = process(text)
+    result = synonymise(processed_text, thes)
+    #pretty print the result
+    print(''.join(result)+'\n')
 

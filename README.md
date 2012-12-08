@@ -1,14 +1,14 @@
-Synonymizer
+Synonymiser
 ===========
 
 ##Description
 
-Takes a text input from the user and returns it with each word replaced by a synonym.
+Takes text input from the user and returns it with each word replaced by a synonym.
 
 ##Usage
 
-When run the user will be prompted to enter some text to 'synonymize'. Once entered, 
-a 'synonymized' version of the text will be returned.
+When run the user will be prompted with `>>`. Once some text is entered and the user has 
+pressed `enter`, a 'synonymized' version of the text will be returned.
 
 ###Example
 
