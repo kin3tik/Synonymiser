@@ -12,7 +12,7 @@ pressed `enter`, a 'synonymized' version of the text will be returned.
 
 ###Example
 
-> `Enter text to synonymise:` A person who never made a mistake never tried anything new.
+> `>>` A person who never made a mistake never tried anything new.
 > `A organism who on no condition brought about a gaucherie to the contrary tried anything extra.`
 
 ##To Do
