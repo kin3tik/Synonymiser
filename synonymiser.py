@@ -31,8 +31,7 @@ def import_thesaurus(file_path):
             #split the line at its delim, assign the first word as key,
             #and the synonyms as the value (in a list)
             line_list = line.split(',')
-            key = line_list[0]
-            del line_list[0]
+            key = line_list.pop(0)
             value = line_list
             #remove the trailing new line character from the last word
             value[-1] = value[-1].rstrip('\n')
