@@ -19,6 +19,7 @@ from os import path
 
 exclude = []
 thesaurus = dict()
+APIkey = '112142d12c570ef8d719f0ecfbd1e171'
 
 # Given a word to search for and a type option (synonym, antonym etc),
 # return a random result word from the api. If no possible results 
@@ -43,7 +44,7 @@ def get_from_thesaurus(option, word):
 #            String - the word to search for
 # Return:    String - a random result word of type 'option'
 def get_from_api(option, word):
-    url = 'http://words.bighugelabs.com/api/2/112142d12c570ef8d719f0ecfbd1e171/'+word+'/json'
+    url = 'http://words.bighugelabs.com/api/2/'+APIkey+'/'+word+'/json'
     try:
         response = urllib.request.urlopen(url).read().decode('utf-8')
         jsob = json.loads(response)
